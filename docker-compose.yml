@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  tarantool:
+    build:
+      dockerfile: Dockerfile      
+      context: . 
+    container_name: tarantool
+    hostname: taran.tool
+    restart: always
+    volumes:
+      - ./data/tarantool:/var/lib/tarantool
+      - ./app:/opt/tarantool 
+    ports:       
+      - ${TARANTOOL_NETWORK_PORT}    
+    networks:
+      default:
+        ipv4_address: ${TARANTOOL_NETWORK_ADDR}
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${TARANTOOL_NETWORK_SUBNET}
