@@ -8,6 +8,8 @@ services:
     container_name: tarantool
     hostname: taran.tool
     restart: always
+    env_file:
+     - .env
     volumes:
       - ./data/tarantool:/var/lib/tarantool
       - ./app:/opt/tarantool 
